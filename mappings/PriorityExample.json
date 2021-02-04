@@ -1,0 +1,59 @@
+{
+  "mappings" : [ {
+    "id" : "b370677b-6d94-481e-beff-eafdf9bf6d31",
+    "request" : {
+      "urlPath" : "/blacklisted-cards/0000-0000-0000-0000",
+      "method" : "GET"
+    },
+    "response" : {
+      "status" : 200,
+      "body" : "{  \"blacklisted\": \"true\"}",
+      "headers" : {
+        "Content-Type" : "application/json"
+      }
+    },
+    "uuid" : "b370677b-6d94-481e-beff-eafdf9bf6d31",
+    "priority" : 1
+  }, {
+    "id" : "b3c824a8-d366-4df4-a63f-d987fc6ab098",
+    "request" : {
+      "urlPath" : "/payments",
+      "method" : "POST",
+      "bodyPatterns" : [ {
+        "matchesJsonPath" : "$.creditCardNumber"
+      }, {
+        "matchesJsonPath" : "$.creditCardExpiry"
+      }, {
+        "matchesJsonPath" : "$.amount"
+      }, {
+        "matchesJsonPath" : "$.paymentId"
+      } ]
+    },
+    "response" : {
+      "status" : 200,
+      "body" : "{  \"paymentResponseStatus\": \"SUCCESS\"}",
+      "headers" : {
+        "Content-Type" : "application/json"
+      }
+    },
+    "uuid" : "b3c824a8-d366-4df4-a63f-d987fc6ab098"
+  }, {
+    "id" : "1268b641-3032-48e2-9b38-3ed21a31542e",
+    "request" : {
+      "urlPathPattern" : "/blacklisted-cards/.*",
+      "method" : "GET"
+    },
+    "response" : {
+      "status" : 200,
+      "body" : "{  \"blacklisted\": \"false\"}",
+      "headers" : {
+        "Content-Type" : "application/json"
+      }
+    },
+    "uuid" : "1268b641-3032-48e2-9b38-3ed21a31542e",
+    "priority" : 100
+  } ],
+  "meta" : {
+    "total" : 3
+  }
+}
