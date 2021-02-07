@@ -75,6 +75,30 @@ Reset
 ```
 
 
+#### Performance Testing
+1. Disable Journal
+2. Increase container threads
+```java
+WireMockServer wireMockServer = new WireMockServer(
+     WireMockConfiguration.wireMockConfig().containerThreads(1000)
+    .jettyAcceptors(700)
+    .jettyAcceptQueueSize(200)
+    .jettyHeaderBufferSize(18000)
+    .asynchronousResponseEnabled(true)
+    .asynchronousResponseThreads(10)
+    //.useFilesUnderClasspath("stub"); // maps to files under resources/stub/mappings
+    );
+```
 
+#### Health check endpoint for cloud deployment
+
+```java
+MappingBuilder mappingBuilder = get("/admin/health");
+ResponseDefinitionBuilder responseBuilder = aResponse()
+                                            .withStatus(200)
+                                            .withBody("{ \"status\": \"UP\" }");
+mappingBuilder.willReturn(responseBuilder);
+wireMockServer.givenThat(mappingBuilder);
+```
 
 
